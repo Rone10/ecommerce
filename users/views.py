@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 def index(request):
     return HttpResponse('hello world!!')
 
-class UserSignup(CreateView):
+class UserSignupView(CreateView):
     form_class = UserCreateForm
     model = User
     template_name = 'users/signup.html'
