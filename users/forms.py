@@ -1,7 +1,7 @@
 from django.forms.widgets import PasswordInput, EmailInput
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from . models import User
+from . models import User, Address
 
 class UserCreateForm(UserCreationForm):
     class Meta:
@@ -14,3 +14,9 @@ password_classes = "shadow appearance-none border border-red-500 rounded w-full 
 class CustomLoginForm(AuthenticationForm):
     email = forms.CharField(widget=EmailInput(attrs={'class':email_classes,'placeholder': 'Email', 'id': 'email'}))
     password = forms.CharField(widget=PasswordInput(attrs={'class': password_classes,'placeholder':'Password',  'id':"password"}))
+
+
+class AddressForm(forms.ModelForm):
+    class Meta:
+        model = Address
+        fields = ['street', 'address_2', 'city', 'postal_code', 'country']
