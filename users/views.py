@@ -17,23 +17,14 @@ class UserSignup(CreateView):
 
     def form_valid(self, form):
         # save the new user first
-
         form.save()
-        # login(self.request, self.object)
-        # # get the username and password
-        # username = self.request.POST[ 'email' ]
-        # password = self.request.POST[ 'password1' ]
-        # # # authenticate user then login
-        # user = authenticate(username=username, password=password)
+         # get the username and password
         user = authenticate(
-            username=form.cleaned_data[ "email" ],
-            password=form.cleaned_data[ "password1" ],
+            username=form.cleaned_data[ "email"],
+            password=form.cleaned_data[ "password1"],
         )
-        # username = form.cleaned_data[ "username"]
-        # password = form.cleaned_data[ "password1"]
-        # user={'username':username, 'password': password  }
         login(self.request, user)
-        return HttpResponseRedirect('address/')
+        return HttpResponseRedirect(self.success_url)
 
 class AddressView(CreateView):
     form_class = AddressForm
