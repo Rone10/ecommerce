@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     #apps
     'users.apps.UsersConfig',
+    'products.apps.ProductsConfig'
 
 ]
 
@@ -124,3 +125,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'users.User'
+
+
+###### MEDIA ###########
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR/'media'
