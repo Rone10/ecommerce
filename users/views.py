@@ -12,7 +12,7 @@ def index(request):
 class UserSignupView(CreateView):
     form_class = UserCreateForm
     model = User
-    template_name = 'users/signup.html'
+    template_name = 'registration/signup.html'
     success_url = 'address/'
 
     def form_valid(self, form):
