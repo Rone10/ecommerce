@@ -6,6 +6,7 @@ from users.forms import CustomLoginForm
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include(('users.urls', 'users'), namespace='users')),
+    path('products/', include(('products.urls', 'products'), namespace= 'products')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/login/', auth_views.auth_login, name='login', kwargs={ "authentication_form": CustomLoginForm }),
 
