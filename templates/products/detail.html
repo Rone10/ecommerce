@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+    <h2>Product Detail Page</h2>
+    {{ product.name }}
+
+
+        <form method="GET" action="{% url 'products:cart' slug=product.slug %}">
+            <input  name="q" type="number">
+            <input type="submit">
+
+        </form>
+
+
+</body>
+</html>

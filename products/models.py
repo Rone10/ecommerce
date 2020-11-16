@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.conf import settings
 CATEGORIES = (
     ('sh', 'Shoes'),
     ('Ha', 'Hats'),
@@ -18,8 +19,25 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-    # def get_absolute_url(self):
-    #     return reverse('account:detail', kwargs={ 'pk': self.pk })
+    def get_absolute_url(self):
+        return reverse('products:detail', kwargs={ 'slug': self.slug})
+
+
+class OrderProduct(models.Model):
+    customer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+
+    def customer_name(self):
+        return self.customer.first_name
+
+
+class Order(models.Model):
+    customer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    products = models.ManyToManyField(OrderProduct)
+    ordered = models.BooleanField(default=False)
+    date_ordered = models.DateTimeField(auto_now_add=True)
+
 
 
 

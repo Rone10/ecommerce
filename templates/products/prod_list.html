@@ -6,7 +6,7 @@
 </head>
 <body>
     {% for prod in products %}
-        {{ prod.name }}
+       <a href="{{ prod.get_absolute_url }}">{{ prod.name }}</a>
 {% endfor %}
 </body>
 </html>
