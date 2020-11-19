@@ -27,9 +27,13 @@ class OrderProduct(models.Model):
     customer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
+    # purchased = models.BooleanField(default=False)
 
     def customer_name(self):
         return self.customer.first_name
+
+    def product_name(self):
+        return self.product.name
 
 
 class Order(models.Model):

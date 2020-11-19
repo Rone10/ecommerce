@@ -11,7 +11,7 @@
     {{ product.name }}
 
 
-        <form method="GET" action="{% url 'products:cart' slug=product.slug %}">
+        <form method="GET" action="{% url 'products:add_to_cart' slug=product.slug %}">
             <input  name="q" type="number">
             <input type="submit">
 
