@@ -11,20 +11,19 @@ def index(request):
 
 class UserSignupView(CreateView):
     form_class = UserCreateForm
-    model = User
     template_name = 'registration/signup.html'
     success_url = 'address/'
 
-    def form_valid(self, form):
-        # save the new user first
-        form.save()
-         # get the username and password
-        user = authenticate(
-            username=form.cleaned_data[ "email"],
-            password=form.cleaned_data[ "password1"],
-        )
-        login(self.request, user)
-        return HttpResponseRedirect(self.success_url)
+    # def form_valid(self, form):
+    #     # save the new user first
+    #     form.save()
+    #      # get the username and password
+    #     user = authenticate(
+    #         username=form.cleaned_data[ "email"],
+    #         password=form.cleaned_data[ "password1"],
+    #     )
+    #     login(self.request, user)
+    #     return HttpResponseRedirect(self.success_url)/
 
 class AddressView(CreateView):
     form_class = AddressForm

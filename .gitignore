@@ -1,3 +1,4 @@
-.idea
+.idea/
 db.sqlite3
 todo.txt
+node_modules/

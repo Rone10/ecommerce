@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
+
+
 <h1>Cart Page</h1>
 {% for item in items %}
     <ul>
@@ -14,9 +12,14 @@
 {% endfor %}
 {% if items %}
 <a href="{% url 'products:order' %}"><p>Order Items</p></a>
-<a href="{% url 'products:myorders' %}">My Orders</a>
+
 {% else %}
-<a href="{% url 'products:list' %}"><p>View Items</p></a>
+
 {% endif %}
-</body>
-</html>
+<a href="{% url 'products:myorders' %}">My Orders</a>
+<a href="{% url 'products:list' %}"><p>View Items</p></a>
+
+
+
+
+{% endblock %}

@@ -27,7 +27,10 @@ class OrderProduct(models.Model):
     customer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
-    # purchased = models.BooleanField(default=False)
+    # ordered = models.BooleanField(default=False)
+    purchased = models.BooleanField(default=False)
+# Change to Cart
+# order_total() method to get total
 
     def customer_name(self):
         return self.customer.first_name

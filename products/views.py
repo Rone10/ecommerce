@@ -1,9 +1,9 @@
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, View
 from . models import Product, OrderProduct,Order
-from django.shortcuts import get_object_or_404, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, HttpResponseRedirect, render
 from django.urls import reverse
 
-# Create your views here.
+
 
 class ProductsListView(ListView):
     template_name = 'products/prod_list.html'
@@ -24,25 +24,17 @@ class AddToCartView(View):
         item = Product.objects.get(slug=kwargs['slug'])
         new_item = OrderProduct.objects.create(customer=self.request.user, product=item, quantity=qty)
         new_item.save()
-
+        # print(new_item.order_set())
         return HttpResponseRedirect(reverse('products:cart'))
 
-# def add_order_item(request, slug):
-#     qty = request.GET.get('q')
-#     item = Product.objects.get(slug=slug)
-#     new_item = OrderProduct.objects.create(customer=request.user, product=item, quantity=qty)
-#     new_item.save()
-#     return HttpResponseRedirect('')
 
-class CartView(TemplateView):
+class CartView(ListView):
     template_name = 'products/cart.html'
+    context_object_name = 'items'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        if self.request.user.is_authenticated:
-            order_items = OrderProduct.objects.filter(customer=self.request.user)
-            context['items'] = order_items
-            return context
+    def get_queryset(self):
+        queryset = OrderProduct.objects.all().filter(customer=self.request.user).exclude(purchased=False)
+        return queryset
 
 
 class OrderView(View):
@@ -54,13 +46,28 @@ class OrderView(View):
         order.ordered = True
         order.save()
         for product in products:
-            product.delete()
+            product.purchased = True
         return HttpResponseRedirect(reverse('products:myorders'))
 
 
 class OrdersView(ListView):
     template_name = 'products/orders.html'
     context_object_name = 'orders'
-    queryset = Order.objects.filter(ordered=True)
+    queryset = Order.objects.all().filter(ordered=True)
 
 
+
+
+
+
+
+
+
+# class CView(ListView):
+#     template_name = 'products/orders.html'
+#     context_object_name = 'orders'
+#     model = OrderProduct
+#
+    # def get_queryset(self):
+    #     queryset = OrderProduct.objects.all().filter(customer=self.request.user).exclude(ordered=True)
+    #     return queryset
