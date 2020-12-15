@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+/*@tailwind utilities;*/
+
+.body {
+    @apply flex flex-col min-h-screen bg-gradient-to-br from-blue-700  via-blue-400 to-blue-900;
+}
