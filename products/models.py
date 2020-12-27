@@ -24,16 +24,11 @@ class Product(models.Model):
 
 
 class OrderProduct(models.Model):
-    customer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
-    # ordered = models.BooleanField(default=False)
-    purchased = models.BooleanField(default=False)
-# Change to Cart
-# order_total() method to get total
-
-    def customer_name(self):
-        return self.customer.first_name
+    
+    def total(self):
+        return self.quantity * self.product.price
 
     def product_name(self):
         return self.product.name
@@ -45,6 +40,15 @@ class Order(models.Model):
     ordered = models.BooleanField(default=False)
     date_ordered = models.DateTimeField(auto_now_add=True)
 
+    def order_total(self):
+        total = 0
+        for prod in self.products:
+            total += prod.total() 
+        return total
 
 
+class Cart(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+   
 
+    

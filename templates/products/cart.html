@@ -1,25 +1,46 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block title %} Cart {% endblock %} {% block content %}
 
-{% block content %}
+<div class="w-full">
+    <div>{% include 'partials/hero.html' %}</div>
+    <h1 class="title">Cart Page</h1>
+    {% if items %}
+    <div class="flex flex-col  w-3/5 mx-auto">
+        {% for item in items %}
+        <form action="post">
+            {% csrf_token %}
+            <div class="flex  space-between mb-5 bg-gray-400 border-4">
+                <img class="w-2/5 h-80 " src="{{ item.product.image.url }}" alt="product image">
+                <div class="flex  w-3/5  items-center text-white text-2xl text-center font-bold">
+                    <div class="flex-1">
+                        <h3 class="text-center ">{{ item.product.name }}</h3>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-center ">{{ item.product.price }}</h3>
+                    </div>
+                    <div class="  flex-1">
+                        <label for="qty">Quantity</label>
+                        <input class="w-10" type="number" name="qty" value="{{item.quantity}}">
+                    </div>
+                </div>
+            </div>
+            <button type="submit">Checkout</button>
+        </form>
+        {% endfor %}
+    </div>
 
+    {% else %}
+    <div>
+        Add something to your cart
+    </div>
+    {% endif %}
+    <div class="h3-text flex justify-between ">
 
-<h1>Cart Page</h1>
-{% for item in items %}
-    <ul>
-    <li>{{ item.product.name }} ${{ item.product.price }} {{ item.product.image }}</li>
-    </ul>
-
-{% endfor %}
-{% if items %}
-<a href="{% url 'products:order' %}"><p>Order Items</p></a>
-
-{% else %}
-
-{% endif %}
-<a href="{% url 'products:myorders' %}">My Orders</a>
-<a href="{% url 'products:list' %}"><p>View Items</p></a>
-
-
+        <a href="{% url 'products:myorders' %} ">My Orders</a>
+        <a href="{% url 'products:list' %} ">
+            <p>View Items</p>
+        </a>
+    </div>
+</div>
 
 
 {% endblock %}

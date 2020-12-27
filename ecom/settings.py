@@ -59,7 +59,7 @@ ROOT_URLCONF = 'ecom.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR/'templates'], #project wide templates directory
+        'DIRS': [BASE_DIR / 'templates'], #project wide templates directory
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -127,6 +127,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [(BASE_DIR/'static'),]
 
 AUTH_USER_MODEL = 'users.User'
+
+LOGIN_REDIRECT_URL = 'products:list'
+LOGOUT_REDIRECT_URL = 'products:list'
 
 
 ###### MEDIA ###########

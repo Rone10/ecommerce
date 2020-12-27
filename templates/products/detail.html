@@ -1,17 +1,97 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 
 
-    <h2>Product Detail Page</h2>
-    {{ product.name }}
-<div>
+<div>{% include 'partials/hero.html' %}</div>
+<!-- <div class="w-4/5 flex mx-auto mb-10">
+    <div class="w-2/5 mr-12">
+        <img class="detail-image" src="{{ product.image.url }}" alt="product image">
+    </div>
+    <div class="flex flex-col w-3/5 pr-16">
+        <h3 class="font-bold text-3xl uppercase text-black  mt-3 mb-5">{{ product.name }}</h3>
+        <div>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque, commodi magni. Unde modi incidunt delectus nemo fugit doloribus, nihil rerum labore esse ame</p>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque, commodi magni. Unde modi incidunt delectus nemo fugit doloribus, nihil rerum labore esse ame</p>
+            <br>
+            <br>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque, commodi magni. Unde modi incidunt delectus nemo fugit doloribus, nihil rerum labore esse ame</p>
 
+        </div>
+        <div class="mt-10 border-t-2 border-b-2 border-black w-16 ">
+            <h3 class="font-bold">${{ product.price }}</h3>
+        </div>
+        <div class="flex mt-10">
+            <p class="font-bold text-lg uppercase mr-3">Quantity:</p>
+            <form class="" method="GET" action="{% url 'products:add_to_cart' slug=product.slug %}">
+                <input class="w-14 border-2 border-gray-300 " name="q" type="number" value="1">
+                <input class="hover:bg-black bg-gray-500 text-white px-2 ml-10" type="submit" value="Add to cart">
+            </form>
+        </div>
+        <div class="flex mt-5">
+            <div class="mr-3 flex border-2 pr-2 hover:bg-blue-700 hover:text-white">
+                <img class="w-4 h-4 m-1 " src="{% static 'images/icons/facebook.png' %}" alt="facebook icon">
+                <p>Share</p>
+            </div>
+            <div class="mr-3 flex border-2 pr-2 hover:bg-blue-500 hover:text-white">
+                <img class="w-4 h-4 m-1 " src="{% static 'images/icons/twitter.png' %}" alt="facebook icon">
+                <p>Tweet</p>
+            </div>
+            <div class="mr-3 flex border-2 pr-2 hover:bg-red-800 hover:text-white">
+                <img class="w-4 h-4 m-1 " src="{% static 'images/icons/google-plus-logo.png' %}" alt="facebook icon">
+                <p>Google+</p>
+            </div>
+            <div class="mr-3 flex border-2 pr-2 hover:bg-pink-800 hover:text-white">
+                <img class="w-4 h-4 m-1 " src="{% static 'images/icons/instagram.png' %}" alt="facebook icon">
+                <p>Post</p>
+            </div>
+
+        </div>
+    </div> -->
+
+
+
+<div class="w-4/5 flex mx-auto mb-10">
+    <div class="w-2/5 mr-12">
+        <img class="detail-image" src="{{ product.image.url }}" alt="product image">
+    </div>
+    <div class="flex flex-col w-3/5 pr-16">
+        <h3 class="font-bold text-3xl uppercase text-black  mt-3 mb-5">{{ product.name }}</h3>
+        <div>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque, commodi magni. Unde modi incidunt delectus nemo fugit doloribus, nihil rerum labore esse ame</p>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque, commodi magni. Unde modi incidunt delectus nemo fugit doloribus, nihil rerum labore esse ame</p>
+            <br>
+            <br>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque, commodi magni. Unde modi incidunt delectus nemo fugit doloribus, nihil rerum labore esse ame</p>
+
+        </div>
+        <div class="mt-10 border-t-2 border-b-2 border-black w-16 ">
+            <h3 class="font-bold">${{ product.price }}</h3>
+        </div>
+        <div class="flex mt-10">
+            <!-- <form class="" method="GET" action="{% url 'products:add_to_cart' slug=product.slug %}">
+                <input class="hover:bg-black bg-gray-500 text-white px-2 ml-10" type="submit" value="Add to cart">
+            </form> -->
+
+            <a href="{% url 'products:add_to_cart' slug=product.slug %}">Add to cart</a>
+        </div>
+        <div class="flex mt-5">
+            <div class="mr-3 flex border-2 pr-2 hover:bg-blue-700 hover:text-white">
+                <img class="w-4 h-4 m-1 " src="{% static 'images/icons/facebook.png' %}" alt="facebook icon">
+                <p>Share</p>
+            </div>
+            <div class="mr-3 flex border-2 pr-2 hover:bg-blue-500 hover:text-white">
+                <img class="w-4 h-4 m-1 " src="{% static 'images/icons/twitter.png' %}" alt="facebook icon">
+                <p>Tweet</p>
+            </div>
+            <div class="mr-3 flex border-2 pr-2 hover:bg-red-800 hover:text-white">
+                <img class="w-4 h-4 m-1 " src="{% static 'images/icons/google-plus-logo.png' %}" alt="facebook icon">
+                <p>Google+</p>
+            </div>
+            <div class="mr-3 flex border-2 pr-2 hover:bg-pink-800 hover:text-white">
+                <img class="w-4 h-4 m-1 " src="{% static 'images/icons/instagram.png' %}" alt="facebook icon">
+                <p>Post</p>
+            </div>
+
+        </div>
+    </div>
 </div>
-        <form method="GET" action="{% url 'products:add_to_cart' slug=product.slug %}">
-            <input  name="q" type="number">
-            <input type="submit">
-
-        </form>
-
 {% endblock %}
