@@ -1,58 +1,27 @@
-{% extends 'base.html' %} {% load static %} {% block title %} Orders {% endblock %} {#{% block content %}#} {#
-<div class="w-3/5 mx-auto">#} {#
-    <h1 class="title">My Orders</h1>#} {# {% if orders %}#} {#
-    <h3 class="h3-text">{{ user.first_name }} {{ user.last_name }}</h3>#} {#
-    <div class="bg-blue-600">#} {# {% for order in orders %}#} {##} {# {% for product in order.products.all %}#} {#
-        <div class="flex  w-3/5  items-center text-white text-2xl text-center border-4 font-bold">#} {#
-            <h3 class="h3-text flex-1">{{ product.product.name }}</h3>#} {#
-            <h3 class="h3-text flex-1"> Qty {{ product.quantity }}</h3>#} {#
-            <h3 class="h3-text flex-1"> ${{ product.product.price }}</h3>#} {# </div>#} {# {% endfor %}#} {#{% endfor %}#} {# </div>#} {# {% endif %}#} {#
-    <div class="">#} {# <a href="{% url 'products:cart' %}">Cart</a>#} {#
-        <a href="{% url 'products:list' %}">
-            <p>View Items</p>
-        </a>#} {# </div>#} {# </div>#} {#{% endblock %}#} {% block content %}
-<div class="w-full">
+{% extends 'base.html' %} {% load static %} {% block title %} Orders {% endblock %} {% block content %}
+
+<div class="w-3/5 mx-auto">
     <h1 class="title">My Orders</h1>
-    {% if orders and user.is_authenticated %}
-    <div class="flex flex-col  w-3/5 mx-auto">
-        {% for order in orders %}
-        <div class="flex flex-col space-between mb-5 bg-blue-400 border-4">
-            <h4 class="h3-text">Date Ordered {{ order.date_ordered }}</h4>
+    {% if orders %}
+    <h3 class="h3-text">{{ user.first_name }} {{ user.last_name }}</h3>
 
-            {% for item in order.products.all %}
-            <div class="flex">
-                <img class="w-1/5" src="{{ item.product.image.url }}" alt="product image">
-                <div class="flex  w-3/5  items-center text-white text-2xl text-center font-bold">
-                    <div class="flex-1">
-                        <h3 class="text-center ">{{ item.product.name }}</h3>
-                    </div>
-
-                    <div class="  flex-1">
-                        <h3>${{ item.product.price }}</h3>
-                    </div>
-                    <div class="  flex-1">
-                        <h3>Qty {{ item.quantity }}</h3>
-                    </div>
-                </div>
-            </div>
-
-
-            {% endfor %}
+    <div class="bg-blue-600">
+        {% for order in orders %} {% for product in order.products.all %}
+        <div class="flex  w-3/5  items-center text-white text-2xl text-center border-4 font-bold">
+            <h3 class="h3-text flex-1">{{ product.product.name }}</h3>
+            <h3 class="h3-text flex-1"> Qty {{ product.quantity }}</h3>
+            <h3 class="h3-text flex-1"> ${{ product.product.price }}</h3>
+            <img class="h-96 w-96" src="{{ product.product.image.url }}" alt="">
         </div>
-
+        {% endfor %}
+        <p>{{ order.order_total }}</p>
         {% endfor %}
     </div>
     {% endif %}
-    <div class="h3-text flex justify-between w-3/5 mx-auto">
-        <a href="{% url 'products:order' %}">
-            <p>Order Items</p>
-        </a>
-        <a href="{% url 'products:myorders' %}">My Orders</a>
+    <div class=""><a href="{% url 'products:cart' %}">Cart</a>
         <a href="{% url 'products:list' %}">
             <p>View Items</p>
         </a>
     </div>
-
 </div>
-
 {% endblock %}

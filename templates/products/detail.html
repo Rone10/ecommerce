@@ -2,7 +2,7 @@
 
 
 <div>{% include 'partials/hero.html' %}</div>
-<!-- <div class="w-4/5 flex mx-auto mb-10">
+<div class="w-4/5 flex mx-auto mb-10">
     <div class="w-2/5 mr-12">
         <img class="detail-image" src="{{ product.image.url }}" alt="product image">
     </div>
@@ -21,7 +21,7 @@
         </div>
         <div class="flex mt-10">
             <p class="font-bold text-lg uppercase mr-3">Quantity:</p>
-            <form class="" method="GET" action="{% url 'products:add_to_cart' slug=product.slug %}">
+            <form class="" method="get" action="{% url 'products:add_to_cart' slug=product.slug %}">
                 <input class="w-14 border-2 border-gray-300 " name="q" type="number" value="1">
                 <input class="hover:bg-black bg-gray-500 text-white px-2 ml-10" type="submit" value="Add to cart">
             </form>
@@ -45,11 +45,11 @@
             </div>
 
         </div>
-    </div> -->
+    </div>
 
 
 
-<div class="w-4/5 flex mx-auto mb-10">
+    <!-- <div class="w-4/5 flex mx-auto mb-10">
     <div class="w-2/5 mr-12">
         <img class="detail-image" src="{{ product.image.url }}" alt="product image">
     </div>
@@ -67,9 +67,9 @@
             <h3 class="font-bold">${{ product.price }}</h3>
         </div>
         <div class="flex mt-10">
-            <!-- <form class="" method="GET" action="{% url 'products:add_to_cart' slug=product.slug %}">
+            <form class="" method="GET" action="{% url 'products:add_to_cart' slug=product.slug %}">
                 <input class="hover:bg-black bg-gray-500 text-white px-2 ml-10" type="submit" value="Add to cart">
-            </form> -->
+            </form>
 
             <a href="{% url 'products:add_to_cart' slug=product.slug %}">Add to cart</a>
         </div>
@@ -93,5 +93,5 @@
 
         </div>
     </div>
-</div>
-{% endblock %}
+</div> -->
+    {% endblock %}

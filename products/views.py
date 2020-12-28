@@ -1,9 +1,9 @@
 from django.urls.base import reverse_lazy
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, View
-from . models import Product, OrderProduct,Order, Cart
+from . models import Product, OrderProduct,Order
 from django.shortcuts import get_object_or_404, HttpResponseRedirect, render, HttpResponse
 from django.urls import reverse
-
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class ProductsListView(ListView):
@@ -18,12 +18,35 @@ class ProductDetailView(DetailView):
     context_object_name = 'product'
 
 
+class CreateOrderView(View):
+
+    def get(self, *args, **kwargs):
+        customer = self.request.user
+        products = OrderProduct.objects.all().filter(ordered=False)
+        order = Order.objects.create(customer=customer)
+        if products.exists():
+            for product in products:       
+                product.ordered = True
+                product.removed_from_cart = True
+                product.save()
+                order.products.add(product)
+        order.ordered = True
+        order.save()
+        print('***Checking OrderProduct status****')
+        for product in OrderProduct.objects.all():
+            print(f'{product.product.name} - Ordered: {product.ordered} Removed: {product.removed_from_cart}')
+        return HttpResponseRedirect(reverse('products:checkout'))
+        
+
 class AddToCartView(View):
     def get(self, request, *args, **kwargs):
+        qty = self.request.GET.get('q')
+        print(qty)
         item = Product.objects.get(slug=kwargs['slug'])
-        Cart.objects.create(product=item)
-        return HttpResponseRedirect(reverse_lazy('products:cart'))
- 
+        new_item = OrderProduct.objects.create(product=item, quantity=qty, customer=self.request.user)
+        new_item.save()
+        return HttpResponseRedirect(reverse('products:cart'))
+
  
 class CheckoutView(TemplateView):
      template_name = 'products/checkout.html'
@@ -32,41 +55,7 @@ class CheckoutView(TemplateView):
 class CartView(ListView):
     template_name = 'products/cart.html'
     context_object_name = 'items'
-    queryset = Cart.objects.all()
-
-
-from django.core.exceptions import ObjectDoesNotExist
-
-
-
-
-class CreateOrderView(View):
-    def get(self, *args, **kwargs):
-        customer = self.request.user
-        if Cart.objects.exists():
-            order = Order.objects.create(customer=customer)
-            for item in Cart.objects.all():
-                order_product = OrderProduct.objects.create(product=item.product, quantity=item.quantity) 
-                order_product.save() 
-                order.products.add(order_product)
-                Cart.objects.filter(product=item.product).delete()
-            order.ordered=True
-            order.save()
-        return HttpResponseRedirect(reverse('products:checkout'))
-# class CreateOrderView(View):
-#     def get(self, *args, **kwargs):
-#         customer = self.request.user
-#         if Cart.objects.exists():
-#             order = Order.objects.create(customer=customer)
-
-#             for item in Cart.objects.all():  #new code
-#                 item.products.purchased = True #new code
-#                 order.products.add(item.products)
-#                 Cart.objects.filter(products=item.products).delete()
-#             order.ordered=True
-#             order.save()
-
-#         return HttpResponseRedirect(reverse('products:checkout'))
+    queryset = OrderProduct.objects.all().exclude(ordered=True)
 
 
 class OrdersView(ListView):
@@ -74,20 +63,3 @@ class OrdersView(ListView):
     context_object_name = 'orders'
     queryset = Order.objects.all().filter(ordered=True)
 
-
-
-
-
-
-
-
-
-
-# class CView(ListView):
-#     template_name = 'products/orders.html'
-#     context_object_name = 'orders'
-#     model = OrderProduct
-#
-    # def get_queryset(self):
-    #     queryset = OrderProduct.objects.all().filter(customer=self.request.user).exclude(ordered=True)
-    #     return queryset

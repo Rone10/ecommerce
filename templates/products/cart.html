@@ -6,8 +6,8 @@
     {% if items %}
     <div class="flex flex-col  w-3/5 mx-auto">
         {% for item in items %}
-        <form action="post">
-            {% csrf_token %}
+        <form method="GET">
+
             <div class="flex  space-between mb-5 bg-gray-400 border-4">
                 <img class="w-2/5 h-80 " src="{{ item.product.image.url }}" alt="product image">
                 <div class="flex  w-3/5  items-center text-white text-2xl text-center font-bold">
@@ -23,24 +23,22 @@
                     </div>
                 </div>
             </div>
-            <button type="submit">Checkout</button>
         </form>
+        <a href="{% url 'products:order' %}">
+            <p>Order Items</p>
+        </a>
         {% endfor %}
     </div>
-
     {% else %}
     <div>
         Add something to your cart
     </div>
     {% endif %}
     <div class="h3-text flex justify-between ">
-
         <a href="{% url 'products:myorders' %} ">My Orders</a>
         <a href="{% url 'products:list' %} ">
             <p>View Items</p>
         </a>
     </div>
 </div>
-
-
 {% endblock %}
