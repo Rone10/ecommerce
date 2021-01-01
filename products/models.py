@@ -37,6 +37,7 @@ class OrderProduct(models.Model):
         return self.product.name
 
 
+
 class Order(models.Model):
     customer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     products = models.ManyToManyField(OrderProduct)

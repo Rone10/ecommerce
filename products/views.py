@@ -30,7 +30,7 @@ class CreateOrderView(View):
                 product.removed_from_cart = True
                 product.save()
                 order.products.add(product)
-        order.ordered = True
+        order.ordered = True 
         order.save()
         print('***Checking OrderProduct status****')
         for product in OrderProduct.objects.all():
@@ -40,16 +40,28 @@ class CreateOrderView(View):
 
 class AddToCartView(View):
     def get(self, request, *args, **kwargs):
-        qty = self.request.GET.get('q')
+        qty = int(self.request.GET.get('q'))
         print(qty)
-        item = Product.objects.get(slug=kwargs['slug'])
-        new_item = OrderProduct.objects.create(product=item, quantity=qty, customer=self.request.user)
-        new_item.save()
+        item = Product.objects.get(id=kwargs['id'])
+        try:
+            checked_item = OrderProduct.objects.get(product=item, ordered=False)
+            if checked_item:
+                prev_qty = checked_item.quantity 
+                checked_item.quantity = prev_qty+qty
+                checked_item.save()
+            return HttpResponseRedirect(reverse('products:cart'))
+        except:   
+            new_item = OrderProduct.objects.create(product=item, quantity=qty, customer=self.request.user)
+            new_item.save()
         return HttpResponseRedirect(reverse('products:cart'))
 
  
 class CheckoutView(TemplateView):
      template_name = 'products/checkout.html'
+
+
+class ContactView(TemplateView):
+     template_name = 'products/contact.html'
 
 
 class CartView(ListView):

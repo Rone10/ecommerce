@@ -8,9 +8,11 @@ urlpatterns = [
     path('checkout/', views.CheckoutView.as_view(), name = 'checkout'),
     path('mycart/', views.CartView.as_view(), name = 'cart'),
     path('order/', views.CreateOrderView.as_view(), name = 'order'),
+    path('contact/', views.ContactView.as_view(), name = 'contact'),
     path('view_orders/', views.OrdersView.as_view(), name = 'myorders'),
     path('<str:slug>/', views.ProductDetailView.as_view(), name='detail'),
-    path('add/<str:slug>/', views.AddToCartView.as_view(), name = 'add_to_cart'),
+    path('add/<int:id>/', views.AddToCartView.as_view(), name = 'add_to_cart'),
+    
 
     # path('add/<int:pk>/', views.AddToCartView.as_view(), name = 'add_to_cart'),
 

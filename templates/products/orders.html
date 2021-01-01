@@ -1,10 +1,8 @@
 {% extends 'base.html' %} {% load static %} {% block title %} Orders {% endblock %} {% block content %}
-
-<div class="w-3/5 mx-auto">
+<!-- <div class="w-3/5 mx-auto">
     <h1 class="title">My Orders</h1>
     {% if orders %}
     <h3 class="h3-text">{{ user.first_name }} {{ user.last_name }}</h3>
-
     <div class="bg-blue-600">
         {% for order in orders %} {% for product in order.products.all %}
         <div class="flex  w-3/5  items-center text-white text-2xl text-center border-4 font-bold">
@@ -23,5 +21,40 @@
             <p>View Items</p>
         </a>
     </div>
+</div> -->
+
+
+
+<h1 class="title">My Orders</h1>
+<div class="flex flex-col  w-3/5 mx-auto mb-10">
+    {% for order in orders %}
+    <div class="flex flex-col mt-5 border-4">
+        <p>Date Ordered: {{ order.date_ordered.date }}</p>
+        {% for product in order.products.all %}
+        <div class="flex h-24 w-full space-between mb-5 border-2 p-1 pb-2 ">
+
+            <img class="w-24 h-24 box-border " src="{{ product.product.image.url }}" alt="product image">
+            <div class="flex  flex-1  items-center text-black text-2xl text-center ">
+
+                <div class="  flex-1 ">
+                    <p class="flex-1 text-center">Qty {{product.quantity}}</p>
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-center ">{{ product.name }}</h3>
+                    <h3 class="text-center font-bold ">${{ product.product.price }}</h3>
+                </div>
+
+
+            </div>
+
+        </div>
+        {% endfor %}
+        <div class="flex justify-end ">
+            <h3 class="mr-40">Order Total <span class="font-bold">${{ order.order_total }}</span> </h3>
+        </div>
+    </div>
+
+
+    {% endfor %}
 </div>
 {% endblock %}
