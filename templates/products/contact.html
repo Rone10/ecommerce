@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+
+<div>{% include 'partials/hero.html' %}</div>
+
+<div class="flex flex-col w-3/5 mx-auto">
+    <p class="title">Contact Us</p>
+    <div class="w-3/5 mx-auto mt-10 text-lg">
+        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae et animi consequuntur nisi aperiam vero corrupti recusandae ipsa exercitationem! Voluptatem, libero veniam officiis impedit blanditiis fuga esse atque nostrum temporibus?
+        </p>
+    </div>
+    <div class="w-3/5 flex  flex-col mx-auto mt-10">
+        <div class="flex ">
+            <div class="flex flex-col justify-center"><img class="w-8 h-8 mr-2 " src="{% static 'images/icons/home.png' %}" alt="office address"></div>
+
+            <p class="text-lg">
+                Ecommerce Store | Shop <br> 1234 Street, Address <br> Vancouver, Canada
+            </p>
+        </div>
+        <div class="flex mt-5 ">
+            <div class=" flex flex-col justify-center"><img class="w-8 h-8 mr-2 " src="{% static 'images/icons/call.png' %}" alt="phone"></div>
+
+            <p class="text-lg">
+                +1 604-000-000
+            </p>
+        </div>
+        <div class="flex my-5 ">
+            <div class=" flex flex-col justify-center"><img class="w-8 h-8 mr-2 " src="{% static 'images/icons/email.png' %}" alt="office address"></div>
+
+            <p class="text-lg">
+                email@ecommerce.com
+            </p>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

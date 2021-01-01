@@ -8,9 +8,10 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(OrderProduct)
 class OrderProductAdmin(admin.ModelAdmin):
-    list_display = ('product_name','quantity', 'customer_name')
+    list_display = ('product_name','quantity', 'ordered' )
 
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('customer', 'ordered', 'date_ordered')
+

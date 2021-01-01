@@ -1,25 +1,54 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% load static %} {% block title %} Cart {% endblock %} {% block content %}
 
-{% block content %}
+<div class="w-full">
+    <div>{% include 'partials/hero.html' %}</div>
+    <div class="flex flex-col  w-3/5 mx-auto border-2 border-gray-200 pl-5 py-2">
+        <h1 class="text-2xl text-black  uppercase">Cart Page</h1>
+    </div>
+    {% if items %}
+    <div class="flex flex-col  w-3/5 mx-auto">
+        {% for item in items %}
+
+        <div class="flex h-44 w-full space-between mb-5 border-2 p-1 pb-2 ">
+            <img class="w-44 h-40 box-border " src="{{ item.product.image.url }}" alt="product image">
+            <div class="flex  flex-1  items-center text-black text-2xl text-center ">
+                <div class="flex-1">
+                    <h3 class="text-center ">{{ item.product.name }}</h3>
+                    <h3 class="text-center font-bold ">${{ item.product.price }}</h3>
+                </div>
+                <div class="  flex-1 ">
+                    <p class="flex-1 text-center">Qty {{item.quantity}}</p>
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-center ">${{ item.total }}</h3>
+                </div>
+
+                <div class="  mx-10">
+                    <img class="w-4 h-4 m-1 " src="{% static 'images/icons/delete.png' %}" alt="delete icon">
+
+                </div>
+            </div>
+        </div>
 
 
-<h1>Cart Page</h1>
-{% for item in items %}
-    <ul>
-    <li>{{ item.product.name }} ${{ item.product.price }} {{ item.product.image }}</li>
-    </ul>
+        {% endfor %}
+        <a href="{% url 'products:order' %}">
+            <p>Order Items</p>
+        </a>
 
-{% endfor %}
-{% if items %}
-<a href="{% url 'products:order' %}"><p>Order Items</p></a>
+    </div>
+    {% else %}
 
-{% else %}
+    <div class="flex flex-col w-3/5 mx-auto mt-16 text-3xl capitalize">
+        <p>Add something to your cart</p>
+        <div class="ml-3 border-2 px-1 py-2 text-center mt-5 bg-red-600 hover:text-white w-1/3 mx-auto">
+            <a class="" href="{% url 'products:list' %}">
+                <p>Shop Items</p>
+            </a>
+        </div>
 
-{% endif %}
-<a href="{% url 'products:myorders' %}">My Orders</a>
-<a href="{% url 'products:list' %}"><p>View Items</p></a>
+    </div>
+    {% endif %}
 
-
-
-
+</div>
 {% endblock %}

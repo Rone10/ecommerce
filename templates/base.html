@@ -6,20 +6,20 @@
 <meta charset="utf-8">
 <link type="image/svg" rel="shortcut icon" href="{% static 'favicon.svg' %}">
 <title>{% block title %} {% endblock title %} | Ecommerce Store</title>
-{#<link href="{% static "css/public/styles.css" %}" rel="stylesheet">#}
-{#<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">#}
+
 <link rel="stylesheet" href="{% static 'css/public/styles.css' %}">
 </head>
 
 <body class="body" >
 {% include 'partials/nav.html' %}
-<div class="flex-grow">
+
+<div class="flex-grow ">
 
 {% block content %}
 
 {% endblock %}
 </div>
 <div class="mb-0 ">
-{#    {% include 'partials/footer.html' %}#}
+    {% include 'partials/footer.html' %}
 </div>
 </body>
