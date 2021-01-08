@@ -1,5 +1,5 @@
 .idea/
-db.sqlite3
+
 todo.txt
 node_modules/
 .vscode/
