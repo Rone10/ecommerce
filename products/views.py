@@ -4,6 +4,7 @@ from . models import Product, OrderProduct,Order
 from django.shortcuts import get_object_or_404, HttpResponseRedirect, render, HttpResponse
 from django.urls import reverse
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class ProductsListView(ListView):
@@ -69,9 +70,17 @@ class CartView(ListView):
     context_object_name = 'items'
     queryset = OrderProduct.objects.all().exclude(ordered=True)
 
-
+ 
 class OrdersView(ListView):
     template_name = 'products/orders.html'
     context_object_name = 'orders'
     queryset = Order.objects.all().filter(ordered=True)
+
+
+class OrdersView(LoginRequiredMixin, ListView):
+    template_name = 'products/orders.html'
+    context_object_name = 'orders'
+
+    def get_queryset(self): 
+        return Order.objects.all().filter(customer=self.request.user, ordered=True)
 

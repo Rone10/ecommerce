@@ -36,7 +36,6 @@ class UserCreateForm(UserCreationForm):
         fields = ('first_name', 'last_name', 'username', 'email', 'password1', 'password2')
 
 
-
 class CustomLoginForm(AuthenticationForm):
     email = forms.CharField(widget=EmailInput(attrs={'class':email_classes,'placeholder': 'Email', 'id': 'email'}))
     password = forms.CharField(widget=PasswordInput(attrs={'class': password_classes,'placeholder':'Password',  'id':"password"}))
