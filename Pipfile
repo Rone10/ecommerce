@@ -6,8 +6,13 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-django = "*"
-pillow = "*"
+Django = "*"
+Pillow = "*"
+whitenoise = "==4.1.4"
+gunicorn = "*"
 
 [requires]
 python_version = "3.8"
+
+[pipenv]
+allow_prereleases = true

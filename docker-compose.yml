@@ -2,8 +2,9 @@ version: '3.8'
 services:
     web:
         build: .
+        # command: pipenv install whitenoise gunicorn
         # command: python /code/manage.py runserver 0.0.0.0:8000
-        command: gunicorn user_mgt.wsgi -b 0.0.0.0:8000 
+        command: gunicorn ecom.wsgi -b 0.0.0.0:8000 
         volumes:
           - .:/code
         ports:

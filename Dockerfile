@@ -11,6 +11,8 @@ WORKDIR /code
 # Install dependencies
 COPY Pipfile Pipfile.lock /code/
 RUN pip install pipenv && pipenv install --system
+# RUN pipenv install whitenoise==4.1.4
+# RUN pipenv install gunicorn
 
 # Copy project
 COPY . /code/
