@@ -25,7 +25,7 @@ SECRET_KEY = 'g&f#*@+sgs9a=andv$s!k*t@i$o3b#^+!^qmo-$1gu&nx_!cev'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mysterious-sierra-66278.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['ecom-1100.herokuapp.com','127.0.0.1']
 
 
 # Application definition
