@@ -11,18 +11,18 @@ This is a basic e-commerce project I built using Django. I used Django's templat
 
 Like most e-commerce websites, you can:
   - as a user:
-    1. View items 
-    2. Add items to cart
-    3. View cart
-    4. Remove items from cart
-    5. Order itmes
-    6. View order history
+    - View items 
+    - Add items to cart
+    - View cart
+    - Remove items from cart
+    - Order itmes
+    - View order history
 
   - as admin:
-    1. Add products
-    2. Set product price
-    3. Remove products
-    4. Grant admin access to staff
+    - Add products
+    - Set product price
+    - Remove products
+    - Grant admin access to staff
 
 ## Dependency Packages
  - Django
